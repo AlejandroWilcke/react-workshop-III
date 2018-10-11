@@ -8,6 +8,9 @@ import SingleAlbum from '../components/SingleAlbum';
 import audio from '../audio';
 import Artists from '../components/Artists';
 import Artist from '../components/Artist';
+import FilterableArtistsContainer from './FilterableArtistsContainer'
+import NewPlayListContainer from './NewPlayListContainer';
+import NewPlayList from '../components/NewPlayList';
 
 export default class Main extends React.Component {
   constructor(){
@@ -119,6 +122,7 @@ export default class Main extends React.Component {
     this.loadSong(song.audioUrl)
   }
 
+
   render() {
     const  { albums, selectedAlbum, selectedSong, isPlaying, progress, artists, selectedArtist } = this.state;
     return (
@@ -139,7 +143,8 @@ export default class Main extends React.Component {
                 />
               )} 
             />
-            <Route path="/artists" exact render={() => <Artists artists={artists} />} />
+            <Route exact path="/newPlayList" render={() => <NewPlayListContainer />} />
+            <Route path="/artists" exact render={() => <FilterableArtistsContainer artists={artists} />} />
             <Route path="/artists/:id" render={({ match }) => 
               <Artist
                 artistId={match.params.id}
@@ -165,4 +170,4 @@ export default class Main extends React.Component {
       </div>
     );
   }
-};
+}
